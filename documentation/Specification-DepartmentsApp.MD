@@ -40,7 +40,6 @@ The list displays the following columns:
 * If the user selects the menu item "Departments" or "Employees", the data is not saved to the database. The corresponding view list is displayed afterwards.
 
 ![Image](new-department.png "new-department")
-
 Pic. 1.2 Add department form.
 
 When adding a department, the following details are required:
