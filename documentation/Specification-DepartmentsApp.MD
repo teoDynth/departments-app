@@ -191,7 +191,7 @@ When editing an employee, the following details are required:
 Constrains for data validation:
 * Employee salary - entered data must be a number.
 
-### 2.6 Removing the employee
+### 2.6 Remove employee
 #### _Main scenario:_
 * The user, while in the employee view, presses the "Delete this employee" button;
 * Employee record is deleted from the database;
