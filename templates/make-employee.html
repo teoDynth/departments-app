@@ -1,0 +1,16 @@
+{% include 'header.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% if is_edit: %}
+  <h1>Edit employee information</h1>
+  <form action="{{ url_for('edit_employee', employee_id=employee_id) }}" method="POST">
+    {{ form.csrf_token }}
+    {{ wtf.quick_form(form, form_type="inline", novalidate=True, button_map={"submit": "primary"}) }}
+  </form>
+{% else: %}
+  <h1>New employee information</h1>
+  <form action="{{ url_for('new_employee') }}" method="POST">
+    {{ form.csrf_token }}
+    {{ wtf.quick_form(form, form_type="inline", novalidate=True, button_map={"submit": "primary"}) }}
+  </form>
+{% endif %}
+{% include 'footer.html' %}
