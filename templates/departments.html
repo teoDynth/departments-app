@@ -1,0 +1,22 @@
+{% include 'header.html' %}
+  <h1>Departments</h1>
+  <table class="table table-bordered table-sm">
+    <tr>
+      <th>Department Name</th>
+      <th>Average Department Salary</th>
+    </tr>
+    {% for department in departments %}
+    <tr>
+      <td>
+        <a href="{{ url_for('show_department', department_id=department.id) }}">{{ department.name }}</a>
+      </td>
+      <td>
+        {{ calculate_average_salary(department) }}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('new_department') }}">
+    <button type="button" class="btn btn-primary">Add a new department to the database</button>
+  </a>
+{% include 'footer.html' %}
