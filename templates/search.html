@@ -1,0 +1,23 @@
+{% include 'header.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+  <h1>Search an employee by birthday</h1>
+  <form action="{{ url_for('search_employee') }}" method="POST">
+    {{ first_form.csrf_token }}
+    {{ wtf.quick_form(first_form, form_type="inline", novalidate=True, button_map={"submit": "primary"}) }}
+  </form>
+  <br>
+  <p>Or search an employee by a birthday between certain dates:</p>
+  <form action="{{ url_for('search_employee') }}" method="POST">
+    {{ second_form.csrf_token }}
+    {{ wtf.quick_form(second_form, form_type="inline", novalidate=True, button_map={"submit": "primary"}) }}
+  </form>
+  <h2>Results:</h2>
+  {% if results %}
+    {% for employee in results %}
+      <a href="{{ url_for('show_employee', employee_id=employee.id) }}"> {{ employee.name }} </a>
+      <br>
+    {% endfor %}
+  {% else %}
+    <p>Sorry, no results yet</p>
+  {% endif %}
+{% include 'footer.html' %}
