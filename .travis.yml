@@ -13,4 +13,4 @@ branches:
     - main
 deploy:
   - provider: heroku
-    app: departments-app-2022
+    app: departments-app
