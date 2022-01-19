@@ -1,7 +1,10 @@
 """Module with DeleteEmployeeTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import browser
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
+browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
 class DeleteEmployeeTest(unittest.TestCase):
@@ -15,7 +18,7 @@ class DeleteEmployeeTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_employee_deletion(self):
-        from tests.test_functions import create_employee, delete_employee
+        from service.test_functions import create_employee, delete_employee
         driver = self.driver
         create_employee(driver)
         delete_employee(driver, 'Jesus Christ')

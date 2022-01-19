@@ -1,7 +1,10 @@
 """Module with CreateEmployeeTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import browser
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
+browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
 class CreateEmployeeTest(unittest.TestCase):
@@ -12,14 +15,14 @@ class CreateEmployeeTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_employee_creation(self):
-        from tests.test_functions import create_employee
+        from service.test_functions import create_employee
         driver = self.driver
         create_employee(driver)
         employees = self.app.get('/employees')
         self.assertIn('Jesus Christ', str(employees.data))
 
     def tearDown(self):
-        from tests.test_functions import delete_employee
+        from service.test_functions import delete_employee
         driver = self.driver
         delete_employee(driver, 'Jesus Christ')
         self.driver.close()

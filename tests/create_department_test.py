@@ -1,7 +1,10 @@
 """Module with CreateDepartmentTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import browser
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
+browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
 class CreateDepartmentTest(unittest.TestCase):
@@ -12,14 +15,14 @@ class CreateDepartmentTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_department_creation(self):
-        from tests.test_functions import create_department
+        from service.test_functions import create_department
         driver = self.driver
         create_department(driver)
         departments = self.app.get('/')
         self.assertIn('Test department', str(departments.data))
 
     def tearDown(self):
-        from tests.test_functions import delete_department
+        from service.test_functions import delete_department
         driver = self.driver
         delete_department(driver, 'Test department')
         self.driver.close()

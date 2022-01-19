@@ -1,7 +1,10 @@
 """Module with DeleteDepartmentTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import browser
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
+browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
 class DeleteDepartmentTest(unittest.TestCase):
@@ -15,7 +18,7 @@ class DeleteDepartmentTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_department_deletion(self):
-        from tests.test_functions import create_department, delete_department
+        from service.test_functions import create_department, delete_department
         driver = self.driver
         create_department(driver)
         delete_department(driver, 'Test department')
