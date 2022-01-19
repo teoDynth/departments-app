@@ -8,11 +8,4 @@ script:
   - coverage run main.py -m pytest tests/
 after_success:
   - coveralls
-branches:
-  only:
-    - main
-deploy:
-  - provider: heroku
-  api-key: 
-    secure: 9b9dff33-23c6-4f9b-b7ea-eae2b241b61d
-    app: departments-app-2222
+
