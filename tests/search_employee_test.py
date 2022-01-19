@@ -1,7 +1,7 @@
 """Module with SearchEmployeeTest unittest Test Case class."""
 import unittest
 import main
-from test_functions import create_employee, delete_employee, browser
+from tests.test_functions import create_employee, delete_employee, browser
 from selenium.webdriver.common.by import By
 
 

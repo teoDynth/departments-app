@@ -1,7 +1,7 @@
 """Module with CreateDepartmentTest unittest Test Case class."""
 import unittest
 import main
-from test_functions import create_department, delete_department, browser
+from tests.test_functions import create_department, delete_department, browser
 
 
 class CreateDepartmentTest(unittest.TestCase):

@@ -12,7 +12,6 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 browser = webdriver.Chrome(ChromeDriverManager().install())
-browser.close()
 
 
 def create_department(driver):
