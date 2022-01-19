@@ -1,7 +1,7 @@
 """Module with DeleteEmployeeTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import create_employee, delete_employee, browser
+from tests.test_functions import browser
 
 
 class DeleteEmployeeTest(unittest.TestCase):
@@ -15,6 +15,7 @@ class DeleteEmployeeTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_employee_deletion(self):
+        from tests.test_functions import create_employee, delete_employee
         driver = self.driver
         create_employee(driver)
         delete_employee(driver, 'Jesus Christ')

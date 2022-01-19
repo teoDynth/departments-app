@@ -1,7 +1,7 @@
 """Module with UpdateEmployeeTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import create_employee, delete_employee, browser
+from tests.test_functions import browser
 from selenium.webdriver.common.by import By
 
 
@@ -14,6 +14,7 @@ class UpdateEmployeeTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_employee_edit(self):
+        from tests.test_functions import create_employee
         driver = self.driver
         create_employee(driver)
 
@@ -39,6 +40,7 @@ class UpdateEmployeeTest(unittest.TestCase):
         self.assertIn('Jesus Christ Superstar', str(employees.data))
 
     def tearDown(self):
+        from tests.test_functions import delete_employee
         driver = self.driver
         delete_employee(driver, 'Jesus Christ Superstar')
         self.driver.close()

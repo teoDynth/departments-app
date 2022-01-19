@@ -1,7 +1,7 @@
 """Module with UpdateDepartmentTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import create_department, delete_department, browser
+from tests.test_functions import browser
 from selenium.webdriver.common.by import By
 
 
@@ -14,6 +14,7 @@ class UpdateDepartmentTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_department_edit(self):
+        from tests.test_functions import create_department
         driver = self.driver
         create_department(driver)
 
@@ -28,11 +29,12 @@ class UpdateDepartmentTest(unittest.TestCase):
         submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
         submit.click()
 
-        driver.get('http://127.0.0.1:5000')
+        driver.get('http://192.168.0.118:5000')
         departments = self.app.get('/')
         self.assertIn('Test department edit', str(departments.data))
 
     def tearDown(self):
+        from tests.test_functions import delete_department
         driver = self.driver
         delete_department(driver, 'Test department edit')
         self.driver.close()

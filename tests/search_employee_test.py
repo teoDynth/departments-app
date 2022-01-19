@@ -1,7 +1,7 @@
 """Module with SearchEmployeeTest unittest Test Case class."""
 import unittest
 import main
-from tests.test_functions import create_employee, delete_employee, browser
+from tests.test_functions import browser
 from selenium.webdriver.common.by import By
 
 
@@ -16,6 +16,7 @@ class SearchEmployeeTest(unittest.TestCase):
         self.driver = browser
 
     def test_search_employee(self):
+        from tests.test_functions import create_employee
         driver = self.driver
         create_employee(driver)
 
@@ -31,6 +32,7 @@ class SearchEmployeeTest(unittest.TestCase):
         self.assertIn('Jesus Christ', result.text)
 
     def tearDown(self):
+        from tests.test_functions import delete_employee
         driver = self.driver
         driver.get('http://192.168.0.118:5000/employees')
         delete_employee(driver, 'Jesus Christ')
