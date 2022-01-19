@@ -9,9 +9,9 @@ delete_employee -- deletes a test employee item from the database
 """
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 
-browser = webdriver.Chrome(ChromeDriverManager().install())
+browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
 
 
 def create_department(driver):
