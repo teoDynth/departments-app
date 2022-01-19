@@ -6,7 +6,6 @@ install:
   - pip install coveralls
 script:
   - coverage run main.py -m pytest tests/
-  - CI=false run build
 after_success:
   - coveralls
 branches:
@@ -14,4 +13,5 @@ branches:
     - main
 deploy:
   - provider: heroku
-    app: departments-app
+  api-key: 9b9dff33-23c6-4f9b-b7ea-eae2b241b61d
+    app: departments-app-2222
