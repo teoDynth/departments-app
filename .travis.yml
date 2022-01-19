@@ -3,5 +3,8 @@ python:
   - 3.9
 install:
   - pip install -r requirements.txt
+  - pip install coveralls
 script:
-  - pytest
+  - coverage run main.py -m pytest tests/
+after_success:
+  - coveralls
