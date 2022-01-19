@@ -8,3 +8,9 @@ script:
   - coverage run main.py -m pytest tests/
 after_success:
   - coveralls
+branches:
+  only:
+    - main
+deploy:
+  - provider: heroku
+    app: departments-app-2022
