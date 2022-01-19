@@ -17,9 +17,13 @@ class UpdateDepartmentTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_department_edit(self):
-        from service.test_functions import create_department
         driver = self.driver
-        create_department(driver)
+        page_url = 'http://192.168.0.118:5000/new-department'
+        driver.get(page_url)
+        form = driver.find_element(By.XPATH, '//*[@id="name"]')
+        form.send_keys('Test department')
+        submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
+        submit.click()
 
         department_to_edit = driver.find_element(By.LINK_TEXT, 'Test department')
         department_to_edit.click()
@@ -37,7 +41,9 @@ class UpdateDepartmentTest(unittest.TestCase):
         self.assertIn('Test department edit', str(departments.data))
 
     def tearDown(self):
-        from service.test_functions import delete_department
         driver = self.driver
-        delete_department(driver, 'Test department edit')
+        department_to_delete = driver.find_element(By.LINK_TEXT, 'Test department edit')
+        department_to_delete.click()
+        delete_button = driver.find_element(By.XPATH, '/html/body/a[2]/button')
+        delete_button.click()
         self.driver.close()

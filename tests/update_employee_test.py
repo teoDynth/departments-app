@@ -17,9 +17,17 @@ class UpdateEmployeeTest(unittest.TestCase):
         self.driver = browser
 
     def test_new_employee_edit(self):
-        from service.test_functions import create_employee
         driver = self.driver
-        create_employee(driver)
+        page_url = 'http://192.168.0.118:5000/new-employee'
+        driver.get(page_url)
+        name_form = driver.find_element(By.XPATH, '//*[@id="name"]')
+        name_form.send_keys('Jesus Christ')
+        salary_form = driver.find_element(By.XPATH, '//*[@id="salary"]')
+        salary_form.send_keys('1')
+        birth_form = driver.find_element(By.XPATH, '//*[@id="birthday"]')
+        birth_form.send_keys('01011')
+        submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
+        submit.click()
 
         employee_to_edit = driver.find_element(By.LINK_TEXT, 'Jesus Christ')
         employee_to_edit.click()
@@ -43,9 +51,11 @@ class UpdateEmployeeTest(unittest.TestCase):
         self.assertIn('Jesus Christ Superstar', str(employees.data))
 
     def tearDown(self):
-        from service.test_functions import delete_employee
         driver = self.driver
-        delete_employee(driver, 'Jesus Christ Superstar')
+        employee_to_delete = driver.find_element(By.LINK_TEXT, 'Jesus Christ Superstar')
+        employee_to_delete.click()
+        delete_button = driver.find_element(By.XPATH, '/html/body/a[2]/button')
+        delete_button.click()
         self.driver.close()
 
 
