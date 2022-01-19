@@ -1,15 +1,23 @@
 language: python
+
 python:
-- 3.9
+  - 3.9
+
 install:
-- pip install -r requirements.txt
-- pip install coveralls
+  - pip install -r requirements.txt
+  - pip install coveralls
+  
 script:
-- coverage run main.py -m pytest tests/
+  - python -m unittest discover
+  - behave
+  - coverage erase
+  - coverage run main.py -m pytest tests/
+  
 after_success:
-- coveralls
+  - coveralls
+  
 deploy:
-  provider: heroku
-  api_key:
-    secure: dSkyHpx0Y/L8yUrzZxCk+VCyvi71cmZSR8OrnByevubLMl1az31s6BT90HCYZPrlaS9kfb604Th1xHk1EBSfFc15489dF4KbpMH8dl2ZJSeaDkbPiVnQ0IvsQ4IlU0Yl0VMg9EA21XExPYyb5j4kN2ANNcsYP21c6h7ZZEEmNLaMysYirVrYaaGNd0pIs0wZTwxlOCu47OcufMwxsGHo2fEwRrC1mPTsRprmt6BM3FkmkVQeSGJocbegM7oQ/3CzcHTpxIMLPp0OwPfUCzn3A0hLnbw1xrUhR36BqyocA/OSvoI+a6wPwwcKHb5t7cjxm6ZutPayXOf+c7S/NP6ZO55v/MZPCAcaqVORqibu9lmcchCcoyEHUFvEefluyE5GdMvrAp+2N56RgucrJo/zNdTDcn1aBA108b6ZOFIEkaI0Y+ZutaN4s/FmmCpsXEoWEsdwhkfzLAeNeGZ5Z/18qB5hat+YD/3NBEzQdJyiYYnI1emdHnTaVtJQ894hO6VRJ5XS9lCtGIIxjkIxAxvqsYesViOorLwvZ1aWZo++eCSCfAjppHEGImoRyq0DjIYZ4t/de3omlA2xdfqvsbTdGF2ioVw42wXU2IdoTjAu9V1joLpRD1olfkZJNbkABGr3lq3f7yLK36koFx8RGYMvRmFCZuUTUpOqoMtD6DeVf9c=
-    app: department-app-2022-travis-ci
+  - provider: heroku
+    api_key:
+      secure: dSkyHpx0Y/L8yUrzZxCk+VCyvi71cmZSR8OrnByevubLMl1az31s6BT90HCYZPrlaS9kfb604Th1xHk1EBSfFc15489dF4KbpMH8dl2ZJSeaDkbPiVnQ0IvsQ4IlU0Yl0VMg9EA21XExPYyb5j4kN2ANNcsYP21c6h7ZZEEmNLaMysYirVrYaaGNd0pIs0wZTwxlOCu47OcufMwxsGHo2fEwRrC1mPTsRprmt6BM3FkmkVQeSGJocbegM7oQ/3CzcHTpxIMLPp0OwPfUCzn3A0hLnbw1xrUhR36BqyocA/OSvoI+a6wPwwcKHb5t7cjxm6ZutPayXOf+c7S/NP6ZO55v/MZPCAcaqVORqibu9lmcchCcoyEHUFvEefluyE5GdMvrAp+2N56RgucrJo/zNdTDcn1aBA108b6ZOFIEkaI0Y+ZutaN4s/FmmCpsXEoWEsdwhkfzLAeNeGZ5Z/18qB5hat+YD/3NBEzQdJyiYYnI1emdHnTaVtJQ894hO6VRJ5XS9lCtGIIxjkIxAxvqsYesViOorLwvZ1aWZo++eCSCfAjppHEGImoRyq0DjIYZ4t/de3omlA2xdfqvsbTdGF2ioVw42wXU2IdoTjAu9V1joLpRD1olfkZJNbkABGr3lq3f7yLK36koFx8RGYMvRmFCZuUTUpOqoMtD6DeVf9c=
+    app: department-app-2022
