@@ -11,7 +11,9 @@ script:
   - python -m unittest discover
   - behave
   - coverage erase
-  - coverage run main.py -m pytest tests/
+  - coverage run main.py -m pytest tests/ && coverage html
+  - pylint --output-format=text main.py
+  
   
 after_success:
   - coveralls
