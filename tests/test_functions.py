@@ -9,9 +9,9 @@ delete_employee -- deletes a test employee item from the database
 """
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 
-browser = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
 def create_department(driver):
@@ -21,7 +21,7 @@ def create_department(driver):
     Parameter:
     driver -- driver for chosen web browser
     """
-    page_url = 'http://127.0.0.1:5000/new-department'
+    page_url = 'http://192.168.0.118:5000/new-department'
     driver.get(page_url)
     form = driver.find_element(By.XPATH, '//*[@id="name"]')
     form.send_keys('Test department')
@@ -50,7 +50,7 @@ def create_employee(driver):
     Parameter:
     driver -- driver for chosen web browser
     """
-    page_url = 'http://127.0.0.1:5000/new-employee'
+    page_url = 'http://192.168.0.118:5000/new-employee'
     driver.get(page_url)
     name_form = driver.find_element(By.XPATH, '//*[@id="name"]')
     name_form.send_keys('Jesus Christ')

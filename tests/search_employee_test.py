@@ -32,7 +32,7 @@ class SearchEmployeeTest(unittest.TestCase):
 
     def tearDown(self):
         driver = self.driver
-        driver.get('http://127.0.0.1:5000/employees')
+        driver.get('http://192.168.0.118:5000/employees')
         delete_employee(driver, 'Jesus Christ')
         self.driver.close()
 

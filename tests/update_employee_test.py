@@ -34,7 +34,7 @@ class UpdateEmployeeTest(unittest.TestCase):
         submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
         submit.click()
 
-        driver.get('http://127.0.0.1:5000/employees')
+        driver.get('http://http://192.168.0.118:5000/employees')
         employees = self.app.get('/employees')
         self.assertIn('Jesus Christ Superstar', str(employees.data))
 

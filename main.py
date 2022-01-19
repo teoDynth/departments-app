@@ -4,6 +4,7 @@ from flask_restful import Api
 from flask_migrate import Migrate
 from models.db_models import db
 from views.web_controller import add_url_rules, add_api_resources
+import os
 
 migrate = Migrate()
 
@@ -14,9 +15,9 @@ def create_app():
     application for the use with the database setup.
     """
     app = Flask(__name__)
-    app.secret_key = "12345678"
     Bootstrap(app)
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///department.db"
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///department.db')
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '12345678')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     migrate.init_app(app, db)
