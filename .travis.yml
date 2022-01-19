@@ -6,6 +6,7 @@ install:
   - pip install coveralls
 script:
   - coverage run main.py -m pytest tests/
+  - CI=false run build
 after_success:
   - coveralls
 branches:
