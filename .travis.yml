@@ -15,13 +15,6 @@ install:
 script:
   - python -m unittest discover
   - coverage erase
-  - pylint --output-format=text forms
-  - pylint --output-format=text models
-  - pylint --output-format=text rest
-  - pylint --output-format=text service
-  - pylint --output-format=text forms
-  - pylint --output-format=text tests
-  - pylint --output-format=text views
   - pylint --output-format=text main.py
   
   
