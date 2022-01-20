@@ -1,6 +1,6 @@
 """Module with CreateEmployeeTest unittest Test Case class."""
 import unittest
-import main
+
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -11,7 +11,8 @@ browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 class CreateEmployeeTest(unittest.TestCase):
     """A Test Case class for creating an employee item in the database. Creates and then deletes an employee item."""
     def setUp(self):
-        self.app = main.my_app.test_client()
+        from main import my_app
+        self.app = my_app.test_client()
         self.app.testing = True
         self.driver = browser
 

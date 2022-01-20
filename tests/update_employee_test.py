@@ -1,6 +1,6 @@
 """Module with UpdateEmployeeTest unittest Test Case class."""
 import unittest
-import main
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -12,7 +12,8 @@ class UpdateEmployeeTest(unittest.TestCase):
     """A Test Case class for updating an employee item in the database.
      Creates, updates and then deletes an employee item."""
     def setUp(self):
-        self.app = main.my_app.test_client()
+        from main import my_app
+        self.app = my_app.test_client()
         self.app.testing = True
         self.driver = browser
 

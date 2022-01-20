@@ -6,13 +6,13 @@ GeneralPagesViewTest -- tests general view URLs, not requiring a database item i
 IndividualPagesViewTests -- tests individual view URls, requiring a database item id
 """
 import unittest
-import main
 
 
 class GeneralPagesViewTest(unittest.TestCase):
     """A Test Case class for viewing general URLs."""
     def setUp(self):
-        self.app = main.my_app.test_client()
+        from main import my_app
+        self.app = my_app.test_client()
         self.app.testing = True
 
     def test_view_pages(self):
@@ -33,7 +33,8 @@ class GeneralPagesViewTest(unittest.TestCase):
 class IndividualPagesViewTests(unittest.TestCase):
     """A Test Case class for viewing individual URLs."""
     def setUp(self):
-        self.app = main.my_app.test_client()
+        from main import my_app
+        self.app = my_app.test_client()
         self.app.testing = True
 
     def test_individual_view_pages(self):
