@@ -9,6 +9,8 @@ addons:
 branch: main
 
 install:
+  - sudo apt update
+  - sudo apt install ruby-full
   - pip install -r requirements.txt
   - pip install coveralls
   
