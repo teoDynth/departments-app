@@ -1,3 +1,4 @@
+"""Main file that runs the app."""
 import os
 
 from flask import Flask
@@ -13,14 +14,14 @@ migrate = Migrate()
 
 def create_app():
     """
-    Create application using Flask constructor, initialize the use of Flask-Bootstrap and initialize the
-    application for the use with the database setup.
+    Create application using Flask constructor, initialize the use of Flask-Bootstrap,
+    initialize the application for the use with the database setup, add application URL rules.
     """
     app = Flask(__name__)
     Bootstrap(app)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL?sslmode=require'.replace('postgres://',
-                                                                                                  'postgresql://'),
-                                                           'sqlite:///department.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+        'DATABASE_URL?sslmode=require'.replace('postgres://', 'postgresql://'), 'sqlite:///department.db'
+    )
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '12345678')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
@@ -49,11 +50,9 @@ def utility_processor():
         average_salary = 0
         if len(department.employees) == 0:
             return average_salary
-        else:
-            for employee in department.employees:
-                average_salary += employee.salary
-            return average_salary / len(department.employees)
-
+        for employee in department.employees:
+            average_salary += employee.salary
+        return average_salary / len(department.employees)
     return dict(calculate_average_salary=calculate_average_salary)
 
 
