@@ -16,11 +16,9 @@ install:
 script:
   - python -m unittest discover
   - coverage erase
-  - CI=false coverage run main.py && coverage html
   - pylint --output-format=text main.py
+  - pytest
   
   
 after_success:
   - coveralls
-  - pytest
-  
