@@ -6,6 +6,8 @@ python:
 addons:
   chrome: stable
 
+branch: main
+
 install:
   - pip install -r requirements.txt
   - pip install coveralls
