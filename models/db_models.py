@@ -34,4 +34,3 @@ class Department(db.Model):
 
     def __repr__(self):
         return f'<Department {self.name!r}>'
-
