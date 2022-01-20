@@ -15,8 +15,8 @@ install:
   
 script:
   - python -m unittest discover
-  - coverage erase
   - pylint --output-format=text main.py
+  - run main.py
   - pytest
   
   
