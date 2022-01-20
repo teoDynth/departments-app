@@ -58,5 +58,5 @@ def add_api_resources(api):
     """
     api.add_resource(restful_departments.DepartmentList, '/api/departments')
     api.add_resource(restful_departments.EmployeeList, '/api/employees')
-    api.add_resource(restful_departments.Department, '/api/departments/<int:department_id>')
-    api.add_resource(restful_departments.Employee, '/api/employees/<int:employee_id>')
+    api.add_resource(restful_departments.OneDepartment, '/api/departments/<int:department_id>')
+    api.add_resource(restful_departments.OneEmployee, '/api/employees/<int:employee_id>')

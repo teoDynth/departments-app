@@ -12,10 +12,12 @@ abort_if_employee_doesnt_exist -- aborts operation if an employee does not exist
 Classes:
 DepartmentList -- shows department list and lets you POST to add new departments
 EmployeeList -- shows employee list and lets you POST to add new employees
-Department -- shows a single department item and lets you delete a department item
-Employee -- shows a single employee item and lets you delete an employee item
+OneDepartment -- shows a single department item and lets you delete a department item
+OneEmployee -- shows a single employee item and lets you delete an employee item
 """
 from flask_restful import reqparse, abort, inputs, Resource
+
+from models.db_models import db, Department, Employee
 
 parser = reqparse.RequestParser()
 parser.add_argument('department', help='Department name')
@@ -30,7 +32,6 @@ def get_departments():
     Get the list of all department items in the database and return it in the form of a dictionary.
     """
     dep_dict = {}
-    from models.db_models import Department
     all_departments = Department.query.all()
     for d in all_departments:
         dep = {d.id: {'department': d.name}}
@@ -43,7 +44,6 @@ def get_employees():
     Get the list of all employee items in the database and return it in the form of a dictionary.
     """
     emp_dict = {}
-    from models.db_models import Employee
     all_employees = Employee.query.all()
     for e in all_employees:
         emp = {e.id: {
@@ -99,7 +99,6 @@ class DepartmentList(Resource):
         Add a new department item to the database.
         Return the list of all department items including a new one.
         """
-        from models.db_models import db, Department
         args = parser.parse_args(strict=True)
         department = Department(name=args['department'])
         db.session.add(department)
@@ -126,7 +125,6 @@ class EmployeeList(Resource):
         Add a new employee item to the database.
         Return the list of all employee items including a new one.
         """
-        from models.db_models import db, Employee
         args = parser.parse_args(strict=True)
         employee = Employee(
             name=args['employee'],
@@ -139,7 +137,7 @@ class EmployeeList(Resource):
         return get_employees(), 201
 
 
-class Department(Resource):
+class OneDepartment(Resource):
     """
     A class used to represent a CRUD resource for the application.
     Gives access to HTTP methods GET and POST.
@@ -168,7 +166,6 @@ class Department(Resource):
         Parameter:
         department_id(int) -- unique id of a department item
         """
-        from models.db_models import db, Department
         abort_if_department_doesnt_exist(department_id)
         department_to_delete = Department.query.get(department_id)
         db.session.delete(department_to_delete)
@@ -182,7 +179,6 @@ class Department(Resource):
         Parameter:
         department_id(int) -- unique id of a department item
         """
-        from models.db_models import db, Department
         args = parser.parse_args(strict=True)
         department = Department.query.get(department_id)
         department.name = args['department']
@@ -191,7 +187,7 @@ class Department(Resource):
         return all_departments[department_id], 201
 
 
-class Employee(Resource):
+class OneEmployee(Resource):
     """
     A class used to represent a CRUD resource for the application.
     Gives access to HTTP methods GET and POST.
@@ -220,7 +216,6 @@ class Employee(Resource):
         Parameter:
         employee_id(int) -- unique id of an employee item
         """
-        from models.db_models import db, Employee
         employee_to_delete = Employee.query.get(employee_id)
         db.session.delete(employee_to_delete)
         db.session.commit()
@@ -233,7 +228,6 @@ class Employee(Resource):
         Parameter:
         employee_id(int) -- unique id of an employee item
         """
-        from models.db_models import db, Employee
         args = parser.parse_args()
         employee = Employee.query.get(employee_id)
         employee.name = args['employee']
