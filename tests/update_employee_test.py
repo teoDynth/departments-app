@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+from main import my_app
+
 browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
@@ -14,12 +16,12 @@ class UpdateEmployeeTest(unittest.TestCase):
     Creates, updates and then deletes an employee item.
     """
     def setUp(self):
-        from main import my_app
         self.app = my_app.test_client()
         self.app.testing = True
         self.driver = browser
 
     def test_new_employee_edit(self):
+        """Create and update new employee using Selenium webdriver."""
         driver = self.driver
         page_url = 'http://192.168.0.118:5000/new-employee'
         driver.get(page_url)

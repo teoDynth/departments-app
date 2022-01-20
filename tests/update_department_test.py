@@ -5,6 +5,8 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
+from main import my_app
+
 browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
@@ -14,12 +16,12 @@ class UpdateDepartmentTest(unittest.TestCase):
     Creates, updates and then deletes a department item.
     """
     def setUp(self):
-        from main import my_app
         self.app = my_app.test_client()
         self.app.testing = True
         self.driver = browser
 
     def test_new_department_edit(self):
+        """Create and update new department using Selenium webdriver."""
         driver = self.driver
         page_url = 'http://192.168.0.118:5000/new-department'
         driver.get(page_url)

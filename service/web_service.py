@@ -16,6 +16,10 @@ search_employee -- searches for a specific employee using employee birthday
 """
 from flask import render_template, redirect, url_for
 
+from models.db_models import db, Department, Employee
+from forms.web_forms import CreateDepartmentForm, CreateEmployeeForm, SearchByDateForm,\
+     SearchBetweenDatesForm
+
 
 def new_department():
     """
@@ -23,8 +27,6 @@ def new_department():
     On form submit, create a new department item in the database
     and return redirect to department list URL.
     """
-    from models.db_models import db, Department
-    from forms.web_forms import CreateDepartmentForm
     form = CreateDepartmentForm()
     if form.validate_on_submit():
         department = Department(name=form.name.data)
@@ -40,8 +42,6 @@ def new_employee():
     On form submit, create a new employee item in the database
     and return redirect to employee list URL.
     """
-    from models.db_models import db, Department, Employee
-    from forms.web_forms import CreateEmployeeForm
     form = CreateEmployeeForm()
     form.department_id.choices = [(d.id, d.name) for d in Department.query.order_by('name')]
     if form.validate_on_submit():
@@ -59,7 +59,6 @@ def new_employee():
 
 def show_departments():
     """Return template with department list URL."""
-    from models.db_models import Department
     all_departments = Department.query.all()
     return render_template('departments.html', departments=all_departments)
 
@@ -71,7 +70,6 @@ def show_department(department_id):
     Parameter:
     department_id(int) -- unique id of a department item
     """
-    from models.db_models import Department
     requested_department = None
     departments = Department.query.all()
     for department in departments:
@@ -82,7 +80,6 @@ def show_department(department_id):
 
 def show_employees():
     """Return template with employee list URL."""
-    from models.db_models import Employee
     all_employees = Employee.query.all()
     return render_template('employees.html', employees=all_employees)
 
@@ -94,7 +91,6 @@ def show_employee(employee_id):
     Parameter:
     employee_id(int) -- unique id of an employee item
     """
-    from models.db_models import Department, Employee
     requested_employee = None
     all_employees = Employee.query.all()
     all_departments = Department.query.all()
@@ -117,8 +113,6 @@ def edit_department(department_id):
     Parameter:
     department_id(int) -- unique id of a department item
     """
-    from forms.web_forms import CreateDepartmentForm
-    from models.db_models import db, Department
     department = Department.query.get(department_id)
     edit_form = CreateDepartmentForm(name=department.name)
     if edit_form.validate_on_submit():
@@ -142,8 +136,6 @@ def edit_employee(employee_id):
     Parameter:
     employee_id(int) -- unique id of an employee item
     """
-    from forms.web_forms import CreateEmployeeForm
-    from models.db_models import db, Department, Employee
     employee = Employee.query.get(employee_id)
     edit_form = CreateEmployeeForm(
         name=employee.name,
@@ -175,7 +167,6 @@ def delete_department(department_id):
     Parameter:
     department_id(int) -- unique id of a department item
     """
-    from models.db_models import db, Department
     department_to_delete = Department.query.get(department_id)
     db.session.delete(department_to_delete)
     db.session.commit()
@@ -190,7 +181,6 @@ def delete_employee(employee_id):
     Parameter:
     employee_id(int) -- unique id of an employee item
     """
-    from models.db_models import db, Employee
     employee_to_delete = Employee.query.get(employee_id)
     db.session.delete(employee_to_delete)
     db.session.commit()
@@ -203,8 +193,6 @@ def search_employee():
     On form submit, return search results
     and render template with these results displayed.
     """
-    from forms.web_forms import SearchByDateForm, SearchBetweenDatesForm
-    from models.db_models import Employee
     search_by_date_form = SearchByDateForm()
     search_between_dates_form = SearchBetweenDatesForm()
     if search_by_date_form.validate_on_submit():
