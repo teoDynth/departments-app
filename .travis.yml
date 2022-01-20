@@ -15,14 +15,14 @@ install:
 script:
   - python -m unittest discover
   - coverage erase
-  - pylint --output-format=text main.py
-  - pylint --output-format=text forms/web_forms.py
-  - pylint --output-format=text models/db_models.py
-  - pylint --output-format=text rest/restful_departmetns.py
-  - pylint --output-format=text service/web_service.py
-  - pylint --output-format=text forms/web_forms.py
+  - pylint --output-format=text forms
+  - pylint --output-format=text models
+  - pylint --output-format=text rest
+  - pylint --output-format=text service
+  - pylint --output-format=text forms
   - pylint --output-format=text tests
-  - pylint --output-format=text views/web_controller.py
+  - pylint --output-format=text views
+  - pylint --output-format=text main.py
   
   
 after_success:
