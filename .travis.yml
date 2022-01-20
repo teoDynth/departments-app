@@ -13,7 +13,7 @@ install:
 script:
   - python -m unittest discover
   - coverage erase
-  - coverage run main.py -m pytest tests/ && coverage html
+  - pytest
   - pylint --output-format=text main.py
   
   
