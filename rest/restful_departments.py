@@ -1,7 +1,7 @@
 """
 Module with RESTful service implementation.
 
-Adds arguments to Request Parser from Flask-RESTful extension. Contains the following functions and classes -
+Adds arguments to Request Parser from Flask-RESTful extension.
 
 Functions:
 get_departments -- returns a dictionary representation of all departments in the database
@@ -26,7 +26,9 @@ parser.add_argument('department_id', type=int, help='Employee department id')
 
 
 def get_departments():
-    """Get the list of all department items in the database and return it in the form of a dictionary."""
+    """
+    Get the list of all department items in the database and return it in the form of a dictionary.
+    """
     dep_dict = {}
     from models.db_models import Department
     all_departments = Department.query.all()
@@ -37,14 +39,19 @@ def get_departments():
 
 
 def get_employees():
-    """Get the list of all employee items in the database and return it in the form of a dictionary."""
+    """
+    Get the list of all employee items in the database and return it in the form of a dictionary.
+    """
     emp_dict = {}
     from models.db_models import Employee
     all_employees = Employee.query.all()
     for e in all_employees:
-        emp = {e.id: {'employee': e.name, 'salary': f'{e.salary}',
-                      'birthday': f'{e.birthday.year}/{e.birthday.month}/{e.birthday.day}',
-                      'department': e.department.name}}
+        emp = {e.id: {
+            'employee': e.name,
+            'salary': f'{e.salary}',
+            'birthday': f'{e.birthday.year}/{e.birthday.month}/{e.birthday.day}',
+            'department': e.department.name}
+        }
         emp_dict.update(emp)
     return emp_dict
 
@@ -75,7 +82,8 @@ def abort_if_employee_doesnt_exist(employee_id):
 
 class DepartmentList(Resource):
     """
-    A class used to represent a CRUD resource for the application. Gives access to HTTP methods GET and POST.
+    A class used to represent a CRUD resource for the application.
+    Gives access to HTTP methods GET and POST.
     This particular resource deals with the list of departments.
 
     Methods:
@@ -87,7 +95,10 @@ class DepartmentList(Resource):
         return get_departments()
 
     def post(self):
-        """Add a new department item to the database. Return the list of all department items including a new one."""
+        """
+        Add a new department item to the database.
+        Return the list of all department items including a new one.
+        """
         from models.db_models import db, Department
         args = parser.parse_args(strict=True)
         department = Department(name=args['department'])
@@ -98,7 +109,8 @@ class DepartmentList(Resource):
 
 class EmployeeList(Resource):
     """
-    A class used to represent a CRUD resource for the application. Gives access to HTTP methods GET and POST.
+    A class used to represent a CRUD resource for the application.
+    Gives access to HTTP methods GET and POST.
     This particular resource deals with the list of employees.
 
     Methods:
@@ -110,7 +122,10 @@ class EmployeeList(Resource):
         return get_employees()
 
     def post(self):
-        """Add a new employee item to the database. Return the list of all employee items including a new one."""
+        """
+        Add a new employee item to the database.
+        Return the list of all employee items including a new one.
+        """
         from models.db_models import db, Employee
         args = parser.parse_args(strict=True)
         employee = Employee(
@@ -126,14 +141,15 @@ class EmployeeList(Resource):
 
 class Department(Resource):
     """
-     A class used to represent a CRUD resource for the application. Gives access to HTTP methods GET and POST.
-     This particular resource deals with the specified department item.
+    A class used to represent a CRUD resource for the application.
+    Gives access to HTTP methods GET and POST.
+    This particular resource deals with the specified department item.
 
-     Methods:
-         get -- gets the specified department item
-         delete -- deletes the specified department item
-         put -- edits the specified department item
-     """
+    Methods:
+        get -- gets the specified department item
+        delete -- deletes the specified department item
+        put -- edits the specified department item
+    """
     def get(self, department_id):
         """
         Return the specified department item.
@@ -177,14 +193,15 @@ class Department(Resource):
 
 class Employee(Resource):
     """
-     A class used to represent a CRUD resource for the application. Gives access to HTTP methods GET and POST.
-     This particular resource deals with the specified employee item.
+    A class used to represent a CRUD resource for the application.
+    Gives access to HTTP methods GET and POST.
+    This particular resource deals with the specified employee item.
 
-     Methods:
-         get -- gets the specified employee item
-         delete -- deletes the specified employee item
-         put -- edits the specified employee item
-     """
+    Methods:
+        get -- gets the specified employee item
+        delete -- deletes the specified employee item
+        put -- edits the specified employee item
+    """
     def get(self, employee_id):
         """
         Return the specified employee item.

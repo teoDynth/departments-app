@@ -1,5 +1,5 @@
 """
-Module with unittest classes used for testing page viewing. Contains following classes:
+Module with unittest classes used for testing page viewing.
 
 Classes:
 GeneralPagesViewTest -- tests general view URLs, not requiring a database item id

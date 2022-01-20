@@ -9,8 +9,10 @@ browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
 class UpdateEmployeeTest(unittest.TestCase):
-    """A Test Case class for updating an employee item in the database.
-     Creates, updates and then deletes an employee item."""
+    """
+    A Test Case class for updating an employee item in the database.
+    Creates, updates and then deletes an employee item.
+    """
     def setUp(self):
         from main import my_app
         self.app = my_app.test_client()

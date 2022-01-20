@@ -1,5 +1,5 @@
 """
-Module with Flask Forms used by functions that work with the database. Contains the following classes -
+Module with Flask Forms used by functions that work with the database.
 
 Classes:
 CreateDepartmentForm -- creates a web form for adding and editing a department item
@@ -23,18 +23,30 @@ class CreateEmployeeForm(FlaskForm):
     name = StringField(label='Employee name:', validators=[DataRequired()])
     salary = FloatField(label='Employee salary:', validators=[DataRequired()])
     birthday = DateField(label='Employee date of birth:', validators=[DataRequired()])
-    department_id = SelectField(label='Choose a department of an employee:', validators=[DataRequired()], coerce=int)
+    department_id = SelectField(
+        label='Choose a department of an employee:',
+        validators=[DataRequired()], coerce=int
+    )
     submit = SubmitField(label='Submit')
 
 
 class SearchByDateForm(FlaskForm):
-    """A Flask subclass of WTForms Form that creates a web form to search an employee item by birthday."""
-    query_date = DateField(label='Search an employee by a certain date of birth:', validators=[DataRequired()])
+    """
+    A Flask subclass of WTForms Form that creates a web form to search an employee item by
+    birthday.
+    """
+    query_date = DateField(
+        label='Search an employee by a certain date of birth:',
+        validators=[DataRequired()]
+    )
     submit = SubmitField(label='Submit')
 
 
 class SearchBetweenDatesForm(FlaskForm):
-    """A Flask subclass of WTForms Form that creates a web form to search an employee item by birthday between dates."""
+    """
+    A Flask subclass of WTForms Form that creates a web form to search an employee item by
+    birthday between dates.
+    """
     query_date_one = DateField(label='Earliest date of birth:', validators=[DataRequired()])
     query_date_two = DateField(label='Latest date of birth:', validators=[DataRequired()])
     submit = SubmitField(label='Submit')

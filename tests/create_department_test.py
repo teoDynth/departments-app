@@ -9,7 +9,10 @@ browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
 
 class CreateDepartmentTest(unittest.TestCase):
-    """A Test Case class for creating a department item in the database. Creates and then deletes a department item."""
+    """
+    A Test Case class for creating a department item in the database.
+    Creates and then deletes a department item.
+    """
     def setUp(self):
         from main import my_app
         self.app = my_app.test_client()

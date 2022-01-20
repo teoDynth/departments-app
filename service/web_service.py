@@ -1,5 +1,5 @@
 """
-Module with functions to work with DB(CRUD operations and search). Contains the following functions -
+Module with functions to work with DB(CRUD operations and search).
 
 Functions:
 new_department -- creates a new department item in the database
@@ -19,7 +19,8 @@ from flask import render_template, redirect, url_for
 
 def new_department():
     """
-    Render template with department creation web form. On form submit, create a new department item in the database
+    Render template with department creation web form.
+    On form submit, create a new department item in the database
     and return redirect to department list URL.
     """
     from models.db_models import db, Department
@@ -35,7 +36,8 @@ def new_department():
 
 def new_employee():
     """
-    Render template with employee creation web form. On form submit, create a new employee item in the database
+    Render template with employee creation web form.
+    On form submit, create a new employee item in the database
     and return redirect to employee list URL.
     """
     from models.db_models import db, Department, Employee
@@ -99,13 +101,18 @@ def show_employee(employee_id):
     for employee in all_employees:
         if employee.id == employee_id:
             requested_employee = employee
-    return render_template('employee.html', employee=requested_employee, departments=all_departments)
+    return render_template(
+        'employee.html',
+        employee=requested_employee,
+        departments=all_departments
+    )
 
 
 def edit_department(department_id):
     """
-    Render template with department creation web form based on department id. On form submit, update a department
-    item in the database and return redirect to updated department URL.
+    Render template with department creation web form based on department id.
+    On form submit, update a department item in the database
+    and return redirect to updated department URL.
 
     Parameter:
     department_id(int) -- unique id of a department item
@@ -118,13 +125,19 @@ def edit_department(department_id):
         department.name = edit_form.name.data
         db.session.commit()
         return redirect(url_for('show_department', department_id=department.id))
-    return render_template('make-department.html', form=edit_form, is_edit=True, department_id=department_id)
+    return render_template(
+        'make-department.html',
+        form=edit_form,
+        is_edit=True,
+        department_id=department_id
+    )
 
 
 def edit_employee(employee_id):
     """
-    Render template with employee creation web form based on employee id. On form submit, update an employee item in
-    the database and return redirect to updated employee URL.
+    Render template with employee creation web form based on employee id.
+    On form submit, update an employee item in the database
+    and return redirect to updated employee URL.
 
     Parameter:
     employee_id(int) -- unique id of an employee item
@@ -146,12 +159,18 @@ def edit_employee(employee_id):
         employee.department_id = edit_form.department_id.data
         db.session.commit()
         return redirect(url_for('show_employee', employee_id=employee.id))
-    return render_template('make-employee.html', form=edit_form, is_edit=True, employee_id=employee_id)
+    return render_template(
+        'make-employee.html',
+        form=edit_form,
+        is_edit=True,
+        employee_id=employee_id
+    )
 
 
 def delete_department(department_id):
     """
-    Delete a department item from the database using department id. Return redirect to department list URL.
+    Delete a department item from the database using department id.
+    Return redirect to department list URL.
 
     Parameter:
     department_id(int) -- unique id of a department item
@@ -165,7 +184,8 @@ def delete_department(department_id):
 
 def delete_employee(employee_id):
     """
-    Delete an employee item from the database using employee id. Return redirect to employee list URL.
+    Delete an employee item from the database using employee id.
+    Return redirect to employee list URL.
 
     Parameter:
     employee_id(int) -- unique id of an employee item
@@ -179,8 +199,9 @@ def delete_employee(employee_id):
 
 def search_employee():
     """
-    Render template with employee search by birthday web forms. On form submit, return search results and render
-    template with these results displayed.
+    Render template with employee search by birthday web forms.
+    On form submit, return search results
+    and render template with these results displayed.
     """
     from forms.web_forms import SearchByDateForm, SearchBetweenDatesForm
     from models.db_models import Employee
@@ -188,11 +209,24 @@ def search_employee():
     search_between_dates_form = SearchBetweenDatesForm()
     if search_by_date_form.validate_on_submit():
         results = Employee.query.filter_by(birthday=search_by_date_form.query_date.data).all()
-        return render_template('search.html', first_form=search_by_date_form, second_form=search_between_dates_form,
-                               results=results)
+        return render_template(
+            'search.html',
+            first_form=search_by_date_form,
+            second_form=search_between_dates_form,
+            results=results
+        )
     if search_between_dates_form.validate_on_submit():
-        results = Employee.query.filter(Employee.birthday <= search_between_dates_form.query_date_two.data). \
+        results = Employee.query.filter(
+            Employee.birthday <= search_between_dates_form.query_date_two.data). \
             filter(Employee.birthday >= search_between_dates_form.query_date_one.data)
-        return render_template('search.html', first_form=search_by_date_form,
-                               second_form=search_between_dates_form, results=results)
-    return render_template('search.html', first_form=search_by_date_form, second_form=search_between_dates_form)
+        return render_template(
+            'search.html',
+            first_form=search_by_date_form,
+            second_form=search_between_dates_form,
+            results=results
+        )
+    return render_template(
+        'search.html',
+        first_form=search_by_date_form,
+        second_form=search_between_dates_form
+    )

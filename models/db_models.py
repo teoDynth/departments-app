@@ -1,5 +1,5 @@
 """
-Module with Python classes describing DB models. Contains the following classes -
+Module with Python classes describing DB models.
 
 Classes:
 Employee -- describes employee item database model
