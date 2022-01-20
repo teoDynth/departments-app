@@ -58,4 +58,5 @@ def utility_processor():
 
 
 if __name__ == '__main__':
-    my_app.run(host='0.0.0.0', port=5000)
+    os.environ.setdefault('FLASK_ENV', 'development')
+    my_app.run()
