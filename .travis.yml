@@ -13,7 +13,7 @@ install:
 script:
   - python -m unittest discover
   - coverage erase
-  - pylint --output-format=text main.py
+  - pylint --output-format=text main.py, forms/web_forms.py
   
   
 after_success:
