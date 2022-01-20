@@ -23,7 +23,7 @@ class SearchEmployeeTest(unittest.TestCase):
     def test_search_employee(self):
         """Create and search for employee using Selenium webdriver."""
         driver = self.driver
-        page_url = 'http://192.168.0.118:5000/new-employee'
+        page_url = 'http://127.0.0.1:5000/new-employee'
         driver.get(page_url)
         name_form = driver.find_element(By.XPATH, '//*[@id="name"]')
         name_form.send_keys('Jesus Christ')
@@ -47,7 +47,7 @@ class SearchEmployeeTest(unittest.TestCase):
 
     def tearDown(self):
         driver = self.driver
-        driver.get('http://192.168.0.118:5000/employees')
+        driver.get('http://127.0.0.1:5000/employees')
         employee_to_delete = driver.find_element(By.LINK_TEXT, 'Jesus Christ')
         employee_to_delete.click()
         delete_button = driver.find_element(By.XPATH, '/html/body/a[2]/button')

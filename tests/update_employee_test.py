@@ -23,7 +23,7 @@ class UpdateEmployeeTest(unittest.TestCase):
     def test_new_employee_edit(self):
         """Create and update new employee using Selenium webdriver."""
         driver = self.driver
-        page_url = 'http://192.168.0.118:5000/new-employee'
+        page_url = 'http://127.0.0.1:5000/new-employee'
         driver.get(page_url)
         name_form = driver.find_element(By.XPATH, '//*[@id="name"]')
         name_form.send_keys('Jesus Christ')
@@ -51,7 +51,7 @@ class UpdateEmployeeTest(unittest.TestCase):
         submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
         submit.click()
 
-        driver.get('http://192.168.0.118:5000/employees')
+        driver.get('http://127.0.0.1:5000/employees')
         employees = self.app.get('/employees')
         self.assertIn('Jesus Christ Superstar', str(employees.data))
 
