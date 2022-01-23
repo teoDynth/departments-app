@@ -56,3 +56,8 @@ class UpdateDepartmentTest(unittest.TestCase):
         delete_button = driver.find_element(By.XPATH, '/html/body/a[2]/button')
         delete_button.click()
         self.driver.close()
+
+        
+if __name__ == "__main__":
+    unittest.main()
+    
