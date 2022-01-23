@@ -37,7 +37,7 @@ class SearchByDateForm(FlaskForm):
     birthday.
     """
     query_date = DateField(
-        label='Search an employee by a certain date of birth:',
+        label='Search an employee by specific date of birth:',
         validators=[DataRequired()]
     )
     submit = SubmitField(label='Submit')
