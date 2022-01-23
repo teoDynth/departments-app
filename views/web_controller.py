@@ -54,4 +54,3 @@ def add_api_resources(api):
     logger.debug('Adding API resources')
     for key, value in api_resources.items():
         api.add_resource(key, value)
-
