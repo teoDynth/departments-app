@@ -33,7 +33,7 @@ def new_department():
         department = Department(name=form.name.data)
         db.session.add(department)
         db.session.commit()
-        logger.debug(f' Creating {department}')
+        logger.debug('Creating %s', department)
         return redirect(url_for('show_departments'))
     return render_template("make-department.html", form=form)
 
@@ -55,7 +55,7 @@ def new_employee():
         )
         db.session.add(employee)
         db.session.commit()
-        logger.debug(f'Creating {employee}')
+        logger.debug('Creating %s', employee)
         return redirect(url_for('show_employees'))
     return render_template("make-employee.html", form=form)
 
@@ -63,7 +63,7 @@ def new_employee():
 def show_departments():
     """Return template with department list URL."""
     all_departments = Department.query.all()
-    logger.debug(f'Getting all departments')
+    logger.debug('Getting all departments')
     return render_template('departments.html', departments=all_departments)
 
 
@@ -75,14 +75,14 @@ def show_department(department_id):
     department_id(int) -- unique id of a department item
     """
     requested_department = Department.query.filter_by(id=department_id).first()
-    logger.debug(f'Getting {requested_department}')
+    logger.debug('Getting %s', requested_department)
     return render_template('department.html', department=requested_department)
 
 
 def show_employees():
     """Return template with employee list URL."""
     all_employees = Employee.query.all()
-    logger.debug(f'Getting all employees')
+    logger.debug('Getting all employees')
     return render_template('employees.html', employees=all_employees)
 
 
@@ -94,7 +94,7 @@ def show_employee(employee_id):
     employee_id(int) -- unique id of an employee item
     """
     requested_employee = Employee.query.filter_by(id=employee_id).first()
-    logger.debug(f'Getting {requested_employee}')
+    logger.debug('Getting %s', requested_employee)
     return render_template('employee.html', employee=requested_employee)
 
 
@@ -112,7 +112,7 @@ def edit_department(department_id):
     if edit_form.validate_on_submit():
         department.name = edit_form.name.data
         db.session.commit()
-        logger.debug(f'Updating {department}')
+        logger.debug('Updating %s', department)
         return redirect(url_for('show_department', department_id=department.id))
     return render_template(
         'make-department.html',
@@ -145,7 +145,7 @@ def edit_employee(employee_id):
         employee.birthday = edit_form.birthday.data
         employee.department_id = edit_form.department_id.data
         db.session.commit()
-        logger.debug(f'updating {employee}')
+        logger.debug('Updating %s', employee)
         return redirect(url_for('show_employee', employee_id=employee.id))
     return render_template(
         'make-employee.html',
@@ -166,7 +166,7 @@ def delete_department(department_id):
     department_to_delete = Department.query.get(department_id)
     db.session.delete(department_to_delete)
     db.session.commit()
-    logger.debug(f'Deleting {department_to_delete}')
+    logger.debug('Deleting %s', department_to_delete)
     return redirect(url_for('show_departments'))
 
 
@@ -181,7 +181,7 @@ def delete_employee(employee_id):
     employee_to_delete = Employee.query.get(employee_id)
     db.session.delete(employee_to_delete)
     db.session.commit()
-    logger.debug(f'Deleting {employee_to_delete}')
+    logger.debug('Deleting %s', employee_to_delete)
     return redirect(url_for('show_employees'))
 
 

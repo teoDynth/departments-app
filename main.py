@@ -52,16 +52,16 @@ def utility_processor():
         Parameter:
         department -- class object of SQLAlchemy database model Department
         """
-        logger.debug(f'Calculating average salary for {department}')
+        logger.debug('Calculating average salary for %s', department)
         average_salary = 0
         if department.employees:
             for employee in department.employees:
                 average_salary += employee.salary
         else:
-            logger.debug(f'{department} average salary calculated as {average_salary}')
+            logger.debug('%s average salary calculated as %s', department, average_salary)
             return average_salary
         average_salary = average_salary / len(department.employees)
-        logger.debug(f'{department} average salary calculated as {average_salary}')
+        logger.debug('%s average salary calculated as %s', department, average_salary)
         return average_salary
     return dict(calculate_average_salary=calculate_average_salary)
 

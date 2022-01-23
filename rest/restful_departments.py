@@ -106,7 +106,7 @@ class DepartmentList(Resource):
         department = Department(name=args['department'])
         db.session.add(department)
         db.session.commit()
-        logger.debug(f' Creating {department}')
+        logger.debug('Creating %s', department)
         return get_departments(), 201
 
 
@@ -138,7 +138,7 @@ class EmployeeList(Resource):
         )
         db.session.add(employee)
         db.session.commit()
-        logger.debug(f'Creating {employee}')
+        logger.debug('Creating %s', employee)
         return get_employees(), 201
 
 
@@ -162,7 +162,7 @@ class OneDepartment(Resource):
         """
         abort_if_department_doesnt_exist(department_id)
         all_departments = get_departments()
-        logger.debug(f'Getting department with id {department_id}')
+        logger.debug('Getting department with id %s', department_id)
         return all_departments[department_id]
 
     def delete(self, department_id):
@@ -176,7 +176,7 @@ class OneDepartment(Resource):
         department_to_delete = Department.query.get(department_id)
         db.session.delete(department_to_delete)
         db.session.commit()
-        logger.debug(f'Deleting department with id {department_id}')
+        logger.debug('Deleting department with id %s', department_id)
         return '', 204
 
     def put(self, department_id):
@@ -191,7 +191,7 @@ class OneDepartment(Resource):
         department.name = args['department']
         db.session.commit()
         all_departments = get_departments()
-        logger.debug(f'Updating department with id {department_id}')
+        logger.debug('Updating department with id %s', department_id)
         return all_departments[department_id], 201
 
 
@@ -215,7 +215,7 @@ class OneEmployee(Resource):
         """
         abort_if_employee_doesnt_exist(employee_id)
         all_employees = get_employees()
-        logger.debug(f'Getting employee with id {employee_id}')
+        logger.debug('Getting employee with id %s', employee_id)
         return all_employees[employee_id]
 
     def delete(self, employee_id):
@@ -228,7 +228,7 @@ class OneEmployee(Resource):
         employee_to_delete = Employee.query.get(employee_id)
         db.session.delete(employee_to_delete)
         db.session.commit()
-        logger.debug(f'Deleting employee with id {employee_id}')
+        logger.debug('Deleting employee with id %s', employee_id)
         return '', 204
 
     def put(self, employee_id):
@@ -246,5 +246,5 @@ class OneEmployee(Resource):
         employee.department_id = args['department_id']
         db.session.commit()
         all_employees = get_employees()
-        logger.debug(f'Updating employee with id {employee_id}')
+        logger.debug('Updating employee with id %s', employee_id)
         return all_employees[employee_id], 201
