@@ -35,8 +35,8 @@ def get_departments():
     logger.debug('Getting all departments')
     dep_dict = {}
     all_departments = Department.query.all()
-    for d in all_departments:
-        dep = {d.id: {'department': d.name}}
+    for department in all_departments:
+        dep = {department.id: {'department': department.name}}
         dep_dict.update(dep)
     return dep_dict
 
@@ -48,12 +48,13 @@ def get_employees():
     logger.debug('Getting all employees')
     emp_dict = {}
     all_employees = Employee.query.all()
-    for e in all_employees:
-        emp = {e.id: {
-            'employee': e.name,
-            'salary': f'{e.salary}',
-            'birthday': f'{e.birthday.year}/{e.birthday.month}/{e.birthday.day}',
-            'department': e.department.name}
+    for employee in all_employees:
+        emp = {employee.id: {
+            'employee': employee.name,
+            'salary': f'{employee.salary}',
+            'birthday':
+                f'{employee.birthday.year}/{employee.birthday.month}/{employee.birthday.day}',
+            'department': employee.department.name}
         }
         emp_dict.update(emp)
     return emp_dict
