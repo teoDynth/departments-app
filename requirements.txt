@@ -13,8 +13,8 @@ crayons==0.4.0
 cryptography==36.0.1
 dominate==2.6.0
 pylint==2.12.2
-pylint-flask==0.6
 pylint-flask-sqlalchemy==0.2.0
+pylint-flask==0.6
 Flask==2.0.2
 Flask-Bootstrap==3.3.7.1
 Flask-Gunicorn==0.1.1
