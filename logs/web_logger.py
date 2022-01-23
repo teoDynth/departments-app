@@ -12,4 +12,3 @@ file_handler.setFormatter(formatter)
 std_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(std_handler)
-
