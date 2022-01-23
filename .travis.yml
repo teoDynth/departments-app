@@ -14,7 +14,7 @@ script:
   - python -m unittest discover
   - behave
   - coverage erase
-  - coverage run tests/page_view_tests.py && coverage html
+  - coverage run --source=tests -m pytest tests/
   - pylint --output-format=text main.py
 
 after_success:
