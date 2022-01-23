@@ -17,9 +17,14 @@ script:
   - python -m unittest discover
   - coverage erase
   - pylint --output-format=text main.py
-  - coverage run main.py && coverage html
-  - pytest
-  
+  - pylint --output-format=text setup.py
+  - pylint --output-format=text forms
+  - pylint --output-format=text logs
+  - pylint --output-format=text models
+  - pylint --output-format=text rest
+  - pylint --output-format=text service
+  - pylint --output-format=text tests
+  - pylint --output-format=text views
   
 after_success:
   - coveralls
