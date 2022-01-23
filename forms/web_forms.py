@@ -25,7 +25,8 @@ class CreateEmployeeForm(FlaskForm):
     birthday = DateField(label='Employee date of birth:', validators=[DataRequired()])
     department_id = SelectField(
         label='Choose a department of an employee:',
-        validators=[DataRequired()], coerce=int
+        validators=[DataRequired()],
+        coerce=int
     )
     submit = SubmitField(label='Submit')
 

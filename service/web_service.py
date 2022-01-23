@@ -19,6 +19,7 @@ from flask import render_template, redirect, url_for
 from models.db_models import db, Department, Employee
 from forms.web_forms import CreateDepartmentForm, CreateEmployeeForm, SearchByDateForm,\
      SearchBetweenDatesForm
+from logs.web_logger import logger
 
 
 def new_department():
@@ -32,6 +33,7 @@ def new_department():
         department = Department(name=form.name.data)
         db.session.add(department)
         db.session.commit()
+        logger.debug(f' Creating {department}')
         return redirect(url_for('show_departments'))
     return render_template("make-department.html", form=form)
 
@@ -53,6 +55,7 @@ def new_employee():
         )
         db.session.add(employee)
         db.session.commit()
+        logger.debug(f'Creating {employee}')
         return redirect(url_for('show_employees'))
     return render_template("make-employee.html", form=form)
 
@@ -60,6 +63,7 @@ def new_employee():
 def show_departments():
     """Return template with department list URL."""
     all_departments = Department.query.all()
+    logger.debug(f'Getting all departments')
     return render_template('departments.html', departments=all_departments)
 
 
@@ -70,17 +74,15 @@ def show_department(department_id):
     Parameter:
     department_id(int) -- unique id of a department item
     """
-    requested_department = None
-    departments = Department.query.all()
-    for department in departments:
-        if department.id == department_id:
-            requested_department = department
+    requested_department = Department.query.filter_by(id=department_id).first()
+    logger.debug(f'Getting {requested_department}')
     return render_template('department.html', department=requested_department)
 
 
 def show_employees():
     """Return template with employee list URL."""
     all_employees = Employee.query.all()
+    logger.debug(f'Getting all employees')
     return render_template('employees.html', employees=all_employees)
 
 
@@ -91,17 +93,9 @@ def show_employee(employee_id):
     Parameter:
     employee_id(int) -- unique id of an employee item
     """
-    requested_employee = None
-    all_employees = Employee.query.all()
-    all_departments = Department.query.all()
-    for employee in all_employees:
-        if employee.id == employee_id:
-            requested_employee = employee
-    return render_template(
-        'employee.html',
-        employee=requested_employee,
-        departments=all_departments
-    )
+    requested_employee = Employee.query.filter_by(id=employee_id).first()
+    logger.debug(f'Getting {requested_employee}')
+    return render_template('employee.html', employee=requested_employee)
 
 
 def edit_department(department_id):
@@ -118,6 +112,7 @@ def edit_department(department_id):
     if edit_form.validate_on_submit():
         department.name = edit_form.name.data
         db.session.commit()
+        logger.debug(f'Updating {department}')
         return redirect(url_for('show_department', department_id=department.id))
     return render_template(
         'make-department.html',
@@ -150,6 +145,7 @@ def edit_employee(employee_id):
         employee.birthday = edit_form.birthday.data
         employee.department_id = edit_form.department_id.data
         db.session.commit()
+        logger.debug(f'updating {employee}')
         return redirect(url_for('show_employee', employee_id=employee.id))
     return render_template(
         'make-employee.html',
@@ -170,6 +166,7 @@ def delete_department(department_id):
     department_to_delete = Department.query.get(department_id)
     db.session.delete(department_to_delete)
     db.session.commit()
+    logger.debug(f'Deleting {department_to_delete}')
     return redirect(url_for('show_departments'))
 
 
@@ -184,6 +181,7 @@ def delete_employee(employee_id):
     employee_to_delete = Employee.query.get(employee_id)
     db.session.delete(employee_to_delete)
     db.session.commit()
+    logger.debug(f'Deleting {employee_to_delete}')
     return redirect(url_for('show_employees'))
 
 
@@ -197,6 +195,7 @@ def search_employee():
     search_between_dates_form = SearchBetweenDatesForm()
     if search_by_date_form.validate_on_submit():
         results = Employee.query.filter_by(birthday=search_by_date_form.query_date.data).all()
+        logger.debug('Searching employee by birthday')
         return render_template(
             'search.html',
             first_form=search_by_date_form,
@@ -207,6 +206,7 @@ def search_employee():
         results = Employee.query.filter(
             Employee.birthday <= search_between_dates_form.query_date_two.data). \
             filter(Employee.birthday >= search_between_dates_form.query_date_one.data)
+        logger.debug('Searching employee by birthday')
         return render_template(
             'search.html',
             first_form=search_by_date_form,

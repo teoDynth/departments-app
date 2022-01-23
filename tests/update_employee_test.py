@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+from logs.web_logger import logger
 from main import my_app
 
 browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
@@ -22,6 +23,7 @@ class UpdateEmployeeTest(unittest.TestCase):
 
     def test_new_employee_edit(self):
         """Create and update new employee using Selenium webdriver."""
+        logger.debug('Creating test employee')
         driver = self.driver
         page_url = 'http://127.0.0.1:5000/new-employee'
         driver.get(page_url)
@@ -34,6 +36,7 @@ class UpdateEmployeeTest(unittest.TestCase):
         submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
         submit.click()
 
+        logger.debug('Updating test employee')
         employee_to_edit = driver.find_element(By.LINK_TEXT, 'Jesus Christ')
         employee_to_edit.click()
         edit_button = driver.find_element(By.XPATH, '/html/body/a[1]/button')
@@ -56,6 +59,7 @@ class UpdateEmployeeTest(unittest.TestCase):
         self.assertIn('Jesus Christ Superstar', str(employees.data))
 
     def tearDown(self):
+        logger.debug('Deleting test employee')
         driver = self.driver
         employee_to_delete = driver.find_element(By.LINK_TEXT, 'Jesus Christ Superstar')
         employee_to_delete.click()

@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+from logs.web_logger import logger
 from main import my_app
 
 browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
@@ -22,6 +23,7 @@ class DeleteDepartmentTest(unittest.TestCase):
 
     def test_new_department_deletion(self):
         """Create and delete new department using Selenium webdriver."""
+        logger.debug('Creating test department')
         driver = self.driver
         page_url = 'http://127.0.0.1:5000/new-department'
         driver.get(page_url)
@@ -29,6 +31,7 @@ class DeleteDepartmentTest(unittest.TestCase):
         form.send_keys('Test department')
         submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
         submit.click()
+        logger.debug('Deleting test department')
         department_to_delete = driver.find_element(By.LINK_TEXT, 'Test department')
         department_to_delete.click()
         delete_button = driver.find_element(By.XPATH, '/html/body/a[2]/button')

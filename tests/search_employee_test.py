@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+from logs.web_logger import logger
 from main import my_app
 
 browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
@@ -22,6 +23,7 @@ class SearchEmployeeTest(unittest.TestCase):
 
     def test_search_employee(self):
         """Create and search for employee using Selenium webdriver."""
+        logger.debug('Creating test employee')
         driver = self.driver
         page_url = 'http://127.0.0.1:5000/new-employee'
         driver.get(page_url)
@@ -34,6 +36,7 @@ class SearchEmployeeTest(unittest.TestCase):
         submit = driver.find_element(By.XPATH, '//*[@id="submit"]')
         submit.click()
 
+        logger.debug('Searching for test employee')
         search_button = driver.find_element(By.XPATH, '/html/body/a[1]/button')
         search_button.click()
 
@@ -46,6 +49,7 @@ class SearchEmployeeTest(unittest.TestCase):
         self.assertIn('Jesus Christ', result.text)
 
     def tearDown(self):
+        logger.debug('Deleting test employee')
         driver = self.driver
         driver.get('http://127.0.0.1:5000/employees')
         employee_to_delete = driver.find_element(By.LINK_TEXT, 'Jesus Christ')

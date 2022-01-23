@@ -7,6 +7,7 @@ IndividualPagesViewTests -- tests individual view URls, requiring a database ite
 """
 import unittest
 
+from logs.web_logger import logger
 from main import my_app
 
 
@@ -17,6 +18,7 @@ class GeneralPagesViewTest(unittest.TestCase):
         self.app.testing = True
 
     def test_view_pages(self):
+        logger.debug('Testing page views')
         departments = self.app.get('/')
         departments_departments = self.app.get('/departments')
         new_department = self.app.get('/new-department')
@@ -38,6 +40,7 @@ class IndividualPagesViewTests(unittest.TestCase):
         self.app.testing = True
 
     def test_individual_view_pages(self):
+        logger.debug('Testing individual page views')
         department = self.app.get('/departments/1')
         edit_department = self.app.get('/edit-department/1')
         employee = self.app.get('/employees/1')
