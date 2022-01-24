@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - 3.9
+  - 3.10
   
 addons:
   chrome: stable
@@ -12,8 +12,10 @@ install:
   
 script:
   - coverage run -m unittest discover
+  - behave
   - coverage erase
   - coverage run main.py -m unittest tests/
+  - pylint --output-format=text main.py
 
 after_success:
   - coveralls
