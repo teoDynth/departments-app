@@ -20,7 +20,7 @@ before_script:
   - sleep 3
 
 script:
-  - run -m unittest discover #&& coverage html
+  - python -m unittest discover #&& coverage html
   - behave
   - coverage erase
   - pylint --output-format=text main.py
