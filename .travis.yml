@@ -28,15 +28,3 @@ script:
 
 after_success:
   - coveralls
-  
-before_deploy:
-  - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
-
-deploy:
-  - provider: heroku
-    on:
-      branch: main
-    skip_cleanup: true
-    api_key:
-      secure: y8aLOJpfV1bf+k0qeeCndtnQbHyxSElQSA60B46qmu1MiyICPG393lEHCRZDNq+MWoKGvA0Ea9Lxg3sdmlHV2zyUw4abgXr2BJD2zgpJcjJVV2TfUYZmrVYYF1xaKKT41r3Lo9Y3qzg/j4kc9MKGc+bZ2+R+Rgk0lYvmpAovompJfDlFlo8E/Je4KnkhXchCaWcCkV4hRtIFzLo/HbNcwmaO88v9PGNzT4RKGCS38m3GuDTOmhPpIBPf2VhUNrKwIFPyS/qxbUQnxMMSgOnCP3LxQkI6ZFWfhQu9zMeiCgkIvbLH+PpJXBokIRbgSU6Z4CdgXbtLf/FGsomQbPMrSpCrYJGDcC2AhKVllPrOl8SaoxdwSFZCnd1ocvQEoTqUmQ2S8TcvfC/gD5INhBjWSjlrLmOmLhFq/NxXpBGch7KGz3TbfT2HnPPXHYyJ64ZfEYQnRn2oQa5iP1qgsB5+NBAj/hOxT+rVi3zkCAAVYCYnjGZkb1xOP/iRR/zAHjrQ+11+LWji68lJZDvNS+MezGR8vB4x8ikU64xmqGrf+to4XYeWWJr6jb6C7keyAgc610smheN+2BR7Q51W5c4f8EGqViOut1ms5Rc5v7bvq2jyypJiqgEjHM1iYeYSNhkK09a1xgkxfKSXAcixVF9SrQfNvuFpPjQwup54YN5hsFM=
-    app: departments-app-2022
