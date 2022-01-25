@@ -3,8 +3,8 @@ language: python
 python:
   - 3.9
 
-services:
-  - xvfb
+#services:
+  #- xvfb
   
 addons:
   chrome: stable
@@ -14,16 +14,15 @@ install:
   - pip install coveralls
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - sleep 3
+ # - "export DISPLAY=:99.0"
+ # - sleep 3
   - python main.py &
   - sleep 3
 
 script:
-  - coverage run -m unittest discover
+  - coverage run -m unittest discover #&& coverage html
   - behave
   - coverage erase
-  - coverage run runner.py && coverage html
   - pylint --output-format=text main.py
 
 after_success:
