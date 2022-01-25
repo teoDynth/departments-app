@@ -11,10 +11,10 @@ install:
   - pip install coveralls
   
 script:
-#  - coverage run -m unittest discover
+  - coverage run -m unittest discover
   - behave
   - coverage erase
-#  - coverage run runner.py && coverage html
+  - coverage run runner.py && coverage html
   - pylint --output-format=text main.py
 
 after_success:
