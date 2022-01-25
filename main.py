@@ -23,7 +23,7 @@ def create_app():
     api = Api(app)
     Bootstrap(app)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-        'DATABASE_URL',
+        'DATABASE_URL?sslmode=require'.replace('postgres://', 'postgresql://'),
         'sqlite:///department.db'
     )
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '12345678')
