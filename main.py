@@ -10,7 +10,6 @@ from models.db_models import db
 from views.web_controller import add_url_rules, add_api_resources
 from logs.web_logger import logger
 
-
 migrate = Migrate()
 
 
@@ -24,7 +23,7 @@ def create_app():
     api = Api(app)
     Bootstrap(app)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-        'DATABASE_URL?sslmode=require'.replace('postgres://', 'postgresql://'),
+        'DATABASE_URL',
         'sqlite:///department.db'
     )
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '12345678')
