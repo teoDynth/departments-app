@@ -16,7 +16,7 @@ install:
 before_script:
   - "export DISPLAY=:99.0"
   - sleep 3
-  - main.py
+  - run main.py
   - sleep 3
 
 script:
